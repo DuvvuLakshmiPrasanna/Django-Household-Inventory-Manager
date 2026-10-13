@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Items{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/components/table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/item_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <h1>Items</h1>
+        <p class="page-header__sub">
+            {{ total_items }} item{{ total_items|pluralize }} across {{ locations|length }} location{{ locations|length|pluralize }}.
+        </p>
+    </div>
+    <a class="btn btn--primary" href="{% url 'inventory:item-create' %}">Add item</a>
+</section>
+
+<form method="get" class="filter-bar" role="search" aria-label="Filter items">
+    <div class="field">
+        <label for="filter-q">Search</label>
+        <input type="search" id="filter-q" name="q" value="{{ query }}" placeholder="Name or description">
+    </div>
+    <div class="field">
+        <label for="filter-location">Location</label>
+        <select id="filter-location" name="location">
+            <option value="">All locations</option>
+            {% for location in locations %}
+            <option value="{{ location.pk }}"{% if location.pk == selected_location %} selected{% endif %}>{{ location.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="filter-bar__actions">
+        <button type="submit" class="btn btn--secondary">Apply</button>
+        {% if is_filtered %}<a class="btn btn--text" href="{% url 'inventory:item-list' %}">Clear</a>{% endif %}
+    </div>
+</form>
+
+{% if items %}
+<div class="table-wrap">
+    <table class="data-table">
+        <caption class="visually-hidden">Household items</caption>
+        <thead>
+            <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Location</th>
+                <th scope="col" class="num">Quantity</th>
+                <th scope="col"><span class="visually-hidden">Actions</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <th scope="row" data-label="Item">
+                    <span class="item-name">{{ item.name }}</span>
+                    {% if item.description %}<span class="item-description">{{ item.description|truncatechars:90 }}</span>{% endif %}
+                </th>
+                <td data-label="Location"><span class="location-tag">{{ item.location.name }}</span></td>
+                <td class="num" data-label="Quantity">{{ item.quantity }}</td>
+                <td class="row-actions">
+                    <a class="btn btn--small btn--secondary"
+                       href="{% url 'inventory:item-update' item.pk %}">Edit<span class="visually-hidden"> {{ item.name }}</span></a>
+                    <a class="btn btn--small btn--danger-outline"
+                       href="{% url 'inventory:item-delete' item.pk %}">Delete<span class="visually-hidden"> {{ item.name }}</span></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% elif is_filtered %}
+<div class="empty-state">
+    <h2>No items match</h2>
+    <p>Try a different search or choose another location.</p>
+    <a class="btn btn--secondary" href="{% url 'inventory:item-list' %}">Show all items</a>
+</div>
+{% else %}
+<div class="empty-state">
+    <h2>No items yet</h2>
+    {% if locations %}
+    <p>Add the first thing you want to keep track of.</p>
+    <a class="btn btn--primary" href="{% url 'inventory:item-create' %}">Add your first item</a>
+    {% else %}
+    <p>Items live in locations. Create a location first, then add items to it.</p>
+    <a class="btn btn--primary" href="{% url 'inventory:location-create' %}">Add a location</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,136 @@
+/* ==========================================================================
+   base/main.css - design tokens, reset, and global typography.
+   Loaded on every page.
+   ========================================================================== */
+
+:root {
+    /* Colour */
+    --color-ink: #1b2a35;
+    --color-ink-soft: #4a5b68;
+    --color-page: #f1f4f6;
+    --color-surface: #ffffff;
+    --color-line: #d5dde3;
+    --color-accent: #1d5c8a;
+    --color-accent-dark: #154566;
+    --color-tape: #f4c430;
+    --color-tape-ink: #3d2f00;
+    --color-danger: #b3261e;
+    --color-danger-dark: #8c1d18;
+    --color-danger-tint: #fdecea;
+    --color-success: #1f6f43;
+    --color-success-tint: #e6f4ec;
+    --color-focus: #005fcc;
+
+    /* Type */
+    --font-body: "Avenir Next", "Segoe UI", "Helvetica Neue", Roboto, Arial, sans-serif;
+    --font-size-base: 1rem;
+    --line-height-base: 1.55;
+
+    /* Space and shape */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2.25rem;
+    --radius: 6px;
+    --measure: 68rem;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body,
+h1,
+h2,
+p,
+ul,
+figure {
+    margin: 0;
+}
+
+ul[class] {
+    padding: 0;
+    list-style: none;
+}
+
+/* Typography */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+}
+
+h1,
+h2 {
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+h1 {
+    font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.1rem);
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 650;
+}
+
+a {
+    color: var(--color-accent);
+    text-underline-offset: 0.18em;
+}
+
+a:hover {
+    color: var(--color-accent-dark);
+}
+
+/* Keyboard focus for links and buttons (form-control focus lives in forms.css) */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+}
+
+main:focus {
+    outline: none;
+}
+
+/* Utilities */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

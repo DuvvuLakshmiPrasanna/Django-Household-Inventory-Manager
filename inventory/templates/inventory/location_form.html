@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% if object %}Edit location{% else %}Add location{% endif %}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/pages/form_page.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>{% if object %}Edit location{% else %}Add location{% endif %}</h1>
+</section>
+
+<form method="post" class="form-card" novalidate>
+    {% csrf_token %}
+    {% include 'inventory/partials/_form_errors.html' %}
+    {% for field in form %}
+        {% include 'inventory/partials/_form_field.html' with field=field %}
+    {% endfor %}
+    <div class="form-actions">
+        <button type="submit" class="btn btn--primary">{% if object %}Save changes{% else %}Add location{% endif %}</button>
+        <a class="btn btn--secondary" href="{% url 'inventory:location-list' %}">Cancel</a>
+    </div>
+</form>
+{% endblock %}

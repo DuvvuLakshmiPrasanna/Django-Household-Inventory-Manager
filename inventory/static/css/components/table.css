@@ -1,0 +1,93 @@
+/* ==========================================================================
+   components/table.css - data tables that stack into cards on narrow screens.
+   Loaded only on pages that show a table.
+   ========================================================================== */
+
+.table-wrap {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    vertical-align: middle;
+}
+
+.data-table thead th {
+    background: #e8eef2;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 0.9rem;
+    font-weight: 650;
+}
+
+.data-table tbody tr + tr {
+    border-top: 1px solid var(--color-line);
+}
+
+.data-table tbody th {
+    font-weight: 600;
+}
+
+.data-table .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.row-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--space-2);
+}
+
+@media (max-width: 40rem) {
+    .data-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
+
+    .data-table,
+    .data-table tbody,
+    .data-table tr,
+    .data-table th,
+    .data-table td {
+        display: block;
+    }
+
+    .data-table tbody th {
+        padding-bottom: var(--space-1);
+    }
+
+    .data-table td {
+        padding-top: var(--space-1);
+        padding-bottom: var(--space-1);
+    }
+
+    .data-table td[data-label]::before {
+        content: attr(data-label) ": ";
+        color: var(--color-ink-soft);
+        font-weight: 400;
+    }
+
+    .data-table .num,
+    .row-actions {
+        text-align: left;
+        justify-content: flex-start;
+    }
+
+    .data-table tbody tr {
+        padding-block: var(--space-3);
+    }
+}

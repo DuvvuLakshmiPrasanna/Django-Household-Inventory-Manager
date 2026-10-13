@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Locations{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/components/table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/location_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div>
+        <h1>Locations</h1>
+        <p class="page-header__sub">Rooms and storage spots where your items live.</p>
+    </div>
+    <a class="btn btn--primary" href="{% url 'inventory:location-create' %}">Add location</a>
+</section>
+
+{% if locations %}
+<div class="table-wrap">
+    <table class="data-table">
+        <caption class="visually-hidden">All locations</caption>
+        <thead>
+            <tr>
+                <th scope="col">Location</th>
+                <th scope="col" class="num">Items</th>
+                <th scope="col"><span class="visually-hidden">Actions</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for location in locations %}
+            <tr>
+                <th scope="row" data-label="Location">
+                    <a href="{% url 'inventory:item-list' %}?location={{ location.pk }}">{{ location.name }}</a>
+                </th>
+                <td class="num" data-label="Items">{{ location.item_count }}</td>
+                <td class="row-actions">
+                    <a class="btn btn--small btn--secondary"
+                       href="{% url 'inventory:item-create' %}?location={{ location.pk }}">Add item here</a>
+                    <a class="btn btn--small btn--secondary"
+                       href="{% url 'inventory:location-update' location.pk %}">Edit<span class="visually-hidden"> {{ location.name }}</span></a>
+                    <a class="btn btn--small btn--danger-outline"
+                       href="{% url 'inventory:location-delete' location.pk %}">Delete<span class="visually-hidden"> {{ location.name }}</span></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <h2>No locations yet</h2>
+    <p>Add a location such as Kitchen, Garage, or Office, then start adding items to it.</p>
+    <a class="btn btn--primary" href="{% url 'inventory:location-create' %}">Add your first location</a>
+</div>
+{% endif %}
+{% endblock %}

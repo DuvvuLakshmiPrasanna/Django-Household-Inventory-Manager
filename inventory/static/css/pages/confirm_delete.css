@@ -1,0 +1,28 @@
+/* ==========================================================================
+   pages/confirm_delete.css - delete confirmation pages.
+   ========================================================================== */
+
+.confirm-card {
+    max-width: 38rem;
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-top: 4px solid var(--color-danger);
+    border-radius: var(--radius);
+}
+
+.confirm-card p + p {
+    margin-top: var(--space-3);
+}
+
+.confirm-card__question {
+    font-size: 1.15rem;
+}
+
+.confirm-card__warning {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-danger-tint);
+    border-radius: var(--radius);
+    color: var(--color-danger-dark);
+    font-weight: 600;
+}

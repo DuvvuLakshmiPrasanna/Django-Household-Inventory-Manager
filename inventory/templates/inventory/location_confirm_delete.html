@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Delete location{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/pages/confirm_delete.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>Delete location</h1>
+</section>
+
+<form method="post" class="confirm-card">
+    {% csrf_token %}
+    <p class="confirm-card__question">Delete the location <strong>{{ object.name }}</strong>?</p>
+    {% if item_count %}
+    <p class="confirm-card__warning" role="alert">
+        This also deletes the {{ item_count }} item{{ item_count|pluralize }} stored in it.
+        This cannot be undone.
+    </p>
+    {% else %}
+    <p>No items are stored here. This cannot be undone.</p>
+    {% endif %}
+    <div class="form-actions">
+        <button type="submit" class="btn btn--danger">Delete location</button>
+        <a class="btn btn--secondary" href="{% url 'inventory:location-list' %}">Keep location</a>
+    </div>
+</form>
+{% endblock %}

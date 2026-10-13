@@ -1,0 +1,28 @@
+/* ==========================================================================
+   components/messages.css - one-off status messages after an action.
+   ========================================================================== */
+
+.messages {
+    margin-bottom: var(--space-5);
+}
+
+.message {
+    margin-bottom: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border-left: 4px solid var(--color-accent);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    font-weight: 600;
+}
+
+.message--success {
+    border-color: var(--color-success);
+    background: var(--color-success-tint);
+    color: var(--color-success);
+}
+
+.message--error {
+    border-color: var(--color-danger);
+    background: var(--color-danger-tint);
+    color: var(--color-danger-dark);
+}

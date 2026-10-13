@@ -1,0 +1,11 @@
+/* ==========================================================================
+   pages/form_page.css - layout for the add/edit form pages.
+   ========================================================================== */
+
+.form-card {
+    max-width: 38rem;
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+}

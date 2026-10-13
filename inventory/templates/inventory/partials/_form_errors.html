@@ -1,0 +1,13 @@
+{# Summary shown above the fields when the form has errors. #}
+{% if form.errors %}
+<div class="error-summary" role="alert">
+    <p class="error-summary__title">Fix the highlighted fields and save again.</p>
+    {% if form.non_field_errors %}
+    <ul class="errorlist">
+        {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endif %}

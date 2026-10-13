@@ -1,0 +1,61 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Inventory Manager{% endblock %} | Household Inventory</title>
+    <meta name="description" content="Keep track of what you own and where it is stored.">
+
+    {# Global styles: loaded on every page #}
+    <link rel="stylesheet" href="{% static 'css/base/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/buttons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/messages.css' %}">
+
+    {% block styles %}
+    {# Page-specific stylesheets are injected here by child templates #}
+    {% endblock %}
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a class="site-header__brand" href="{% url 'inventory:item-list' %}">Household Inventory</a>
+            <nav aria-label="Main">
+                <ul class="site-nav">
+                    <li>
+                        <a href="{% url 'inventory:item-list' %}"
+                           {% if request.path|slice:":7" == "/items/" %}aria-current="page"{% endif %}>Items</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'inventory:location-list' %}"
+                           {% if request.path|slice:":11" == "/locations/" %}aria-current="page"{% endif %}>Locations</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" class="container" tabindex="-1">
+        {% if messages %}
+        <div class="messages" role="status" aria-live="polite">
+            {% for message in messages %}
+            <p class="message message--{{ message.level_tag }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% block content %}
+        {# Page content is injected here by child templates #}
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>Pages are rendered on the server. No JavaScript required.</p>
+        </div>
+    </footer>
+</body>
+</html>

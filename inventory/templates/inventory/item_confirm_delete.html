@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Delete item{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/pages/confirm_delete.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <h1>Delete item</h1>
+</section>
+
+<form method="post" class="confirm-card">
+    {% csrf_token %}
+    <p class="confirm-card__question">Delete <strong>{{ object.name }}</strong> from {{ object.location.name }}?</p>
+    <p>This cannot be undone.</p>
+    <div class="form-actions">
+        <button type="submit" class="btn btn--danger">Delete item</button>
+        <a class="btn btn--secondary" href="{% url 'inventory:item-list' %}">Keep item</a>
+    </div>
+</form>
+{% endblock %}

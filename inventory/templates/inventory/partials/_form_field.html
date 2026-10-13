@@ -1,0 +1,17 @@
+{# Renders one form field: label, help text, input, and its validation errors. #}
+<div class="field{% if field.errors %} field--invalid{% endif %}">
+    <label for="{{ field.id_for_label }}">
+        {{ field.label }}{% if field.field.required %} <span class="field__required" aria-hidden="true">(required)</span>{% endif %}
+    </label>
+    {% if field.help_text %}
+    <p class="field__help" id="{{ field.auto_id }}_helptext">{{ field.help_text }}</p>
+    {% endif %}
+    {{ field }}
+    {% if field.errors %}
+    <ul class="errorlist" id="{{ field.auto_id }}_error">
+        {% for error in field.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>

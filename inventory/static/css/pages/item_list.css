@@ -1,0 +1,49 @@
+/* ==========================================================================
+   pages/item_list.css - styles used only on the items list page.
+   ========================================================================== */
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-5);
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+}
+
+.filter-bar .field {
+    flex: 1 1 14rem;
+    margin-bottom: 0;
+}
+
+.filter-bar__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.item-name {
+    display: block;
+}
+
+.item-description {
+    display: block;
+    max-width: 34rem;
+    color: var(--color-ink-soft);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+/* Label-tape style tag: the one distinctive element of the interface. */
+.location-tag {
+    display: inline-block;
+    padding: 0.1rem 0.6rem;
+    background: var(--color-tape);
+    border-radius: 3px;
+    color: var(--color-tape-ink);
+    font-size: 0.9rem;
+    font-weight: 650;
+}

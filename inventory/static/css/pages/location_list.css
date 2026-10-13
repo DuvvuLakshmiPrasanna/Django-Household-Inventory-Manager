@@ -1,0 +1,7 @@
+/* ==========================================================================
+   pages/location_list.css - styles used only on the locations list page.
+   ========================================================================== */
+
+.data-table tbody th a {
+    font-size: 1.05rem;
+}
